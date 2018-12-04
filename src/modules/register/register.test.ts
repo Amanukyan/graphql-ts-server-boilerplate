@@ -1,3 +1,4 @@
+
 import { request } from "graphql-request";
 import { User } from "../../entity/User";
 import {
@@ -7,13 +8,10 @@ import {
   passwordNotLongEnough
 } from "./errorMessages";
 import { createTypeormConn } from "../../utils/createTypeormConn";
+import { Connection } from "typeorm";
 
-const email = "tomrr@bob.com";
+const email = "tom@bob.com";
 const password = "jalksdf";
-
-beforeAll(async () => {
-  await createTypeormConn();
-});
 
 const mutation = (e: string, p: string) => `
 mutation {
@@ -23,6 +21,14 @@ mutation {
   }
 }
 `;
+
+let conn: Connection;
+beforeAll(async () => {
+  conn = await createTypeormConn();
+});
+afterAll(async () => {
+  conn.close();
+});
 
 describe("Register user", async () => {
   it("check for duplicate emails", async () => {
