@@ -8,3 +8,4 @@ export default async (
   info: any
 ) => {
   return resolver(parent, args, context, info);
+}
