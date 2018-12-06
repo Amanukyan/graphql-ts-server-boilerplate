@@ -1,4 +1,3 @@
-
 import * as rp from "request-promise";
 
 export class TestClient {
@@ -41,6 +40,22 @@ export class TestClient {
         mutation {
           logout
         }
+        `
+      }
+    });
+  }
+
+  async forgotPasswordChange(newPassword: string, key: string) {
+    return rp.post(this.url, {
+      ...this.options,
+      body: {
+        query: `
+          mutation {
+            forgotPasswordChange(newPassword: "${newPassword}", key: "${key}") {
+              path
+              message
+            }
+          }
         `
       }
     });
