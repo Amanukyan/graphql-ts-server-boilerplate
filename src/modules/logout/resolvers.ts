@@ -12,6 +12,7 @@ export const resolvers: ResolverMap = {
         removeAllUsersSessions(userId, redis);
         return true;
       }
+
       return false;
     }
   }
