@@ -21,7 +21,8 @@
       "allowSyntheticDefaultImports": false,
       "experimentalDecorators": true,
       "allowJs": true,
-      "emitDecoratorMetadata": true
+      "emitDecoratorMetadata": true,
+      "typeRoots": ["./node_modules/@types","./src/types"],
     },
     "exclude": ["node_modules"],
     "include": ["./src/**/*.tsx", "./src/**/*.ts"]
