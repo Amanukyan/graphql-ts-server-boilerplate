@@ -1,4 +1,4 @@
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
 import * as faker from "faker";
 
 import {
@@ -8,8 +8,8 @@ import {
   passwordNotLongEnough
 } from "./errorMessages";
 import { Connection } from "typeorm";
-import { TestClient } from "../../utils/TestClient";
-import { createTestConn } from "../../testUtils/createTestConn";
+import { TestClient } from "../../../utils/TestClient";
+import { createTestConn } from "../../../testUtils/createTestConn";
 
 const email = faker.internet.email();
 const password = faker.internet.password();

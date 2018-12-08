@@ -5,19 +5,20 @@ import fetch from "node-fetch";
 import { Connection } from "typeorm";
 
 import { createConfirmEmailLink } from "./createConfirmEmailLink";
-import { createTypeormConn } from "../../utils/createTypeormConn";
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
+import { createTestConn } from "../../../testUtils/createTestConn";
+var faker = require("faker");
 
 let userId = "";
 const redis = new Redis();
+faker.seed(Date.now() + 4);
 
 let conn: Connection;
-
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
   const user = await User.create({
-    email: "bob5@bob.com",
-    password: "jlkajoioiqwe"
+    email: faker.internet.email(),
+    password: faker.internet.password()
   }).save();
   userId = user.id;
 });

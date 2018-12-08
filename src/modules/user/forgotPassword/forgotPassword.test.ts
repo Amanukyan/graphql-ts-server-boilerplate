@@ -1,23 +1,25 @@
-import { createTypeormConn } from "../../utils/createTypeormConn";
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
 import { Connection } from "typeorm";
-import { TestClient } from "../../utils/TestClient";
-import { createForgotPasswordLink } from "../../utils/createForgotPasswordLink";
-import { redis } from "../../redis";
-import { forgotPasswordLockAccount } from "../../utils/forgotPasswordLockAccount";
+import { TestClient } from "../../../utils/TestClient";
+import { createForgotPasswordLink } from "../../../utils/createForgotPasswordLink";
+import { forgotPasswordLockAccount } from "../../../utils/forgotPasswordLockAccount";
 import { passwordNotLongEnough } from "../register/errorMessages";
 import { expiredKeyError } from "./errorMessages";
 import { forgotPasswordLockedError } from "../login/errorMessages";
-import * as faker from "faker";
+import { createTestConn } from "../../../testUtils/createTestConn";
+var faker = require("faker");
+var Redis = require("ioredis");
 
 let conn: Connection;
+export const redis = new Redis();
+faker.seed(Date.now() + 0);
 const email = faker.internet.email();
 const password = faker.internet.password();
 const newPassword = faker.internet.password();
 
 let userId: string;
 beforeAll(async () => {
-  conn = await createTypeormConn();
+  conn = await createTestConn();
   const user = await User.create({
     email,
     password,
