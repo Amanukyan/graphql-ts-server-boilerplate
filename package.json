@@ -21,6 +21,7 @@
     "@types/uuid": "^3.4.4",
     "@types/ws": "^6.0.1",
     "@types/yup": "^0.26.2",
+    "copyfiles": "^2.1.0",
     "gql2ts": "^1.10.1",
     "jest": "^23.6.0",
     "nodemon": "^1.18.6",
@@ -60,7 +61,7 @@
     "start": "NODE_ENV=development nodemon --exec ts-node src/index.ts",
     "test": "NODE_ENV=test jest --watch",
     "gen-schema-types": "ts-node src/scripts/createTypes.ts",
-    "build": "tsc"
+    "build": "rm -rf disr && tsc && copyfiles -u 1 src/**/*.graphql dist"
   },
   "jest": {
     "globalSetup": "./src/testUtils/callSetup.js",
